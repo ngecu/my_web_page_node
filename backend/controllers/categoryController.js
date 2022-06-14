@@ -46,19 +46,14 @@ const deleteCategory = asyncHandler(async (req, res) => {
 // @access  Private/Admin
 const createCategory = asyncHandler(async (req, res) => {
   const category = new Category({
-    name: 'Sample name',
-    price: 0,
-    user: req.user._id,
-    image: '/images/sample.jpg',
-    brand: 'Sample brand',
-    category: 'Sample category',
-    countInStock: 0,
-    numReviews: 0,
-    description: 'Sample description',
+    name: 'Category 1',
+    color: 'Clor Field',
+    slug: 'my_slug',
+    image:'my_image'
   })
 
-  const createdCategory = await post.save()
-  res.status(201).json(createdPost)
+  const createdCategory = await category.save()
+  res.status(201).json(createdCategory)
 })
 
 // @desc    Update a product
@@ -75,16 +70,16 @@ const updateCategory = asyncHandler(async (req, res) => {
     
   } = req.body
 
-  const category = await Category.findById(req.params.id)
+  const category_found = await Category.findById(req.params.id)
 
-  if (category) {
-    category.name = name
-    category.color = color
-    category.slug = description
-    category.image = image
+  if (category_found) {
+    category_found.name = name
+    category_found.color = color
+    category_found.slug = description
+    category_found.image = image
 
 
-    const updatedCategory = await category.save()
+    const updatedCategory = await category_found.save()
     res.json(updatedCategory)
   } else {
     res.status(404)

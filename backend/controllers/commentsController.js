@@ -24,10 +24,10 @@ const deleteComment = asyncHandler(async (req, res) => {
 
   if (post) {
     await post.remove()
-    res.json({ message: 'Post removed' })
+    res.json({ message: 'Comment removed' })
   } else {
     res.status(404)
-    throw new Error('Post not found')
+    throw new Error('Comment not found')
   }
 })
 
@@ -36,19 +36,11 @@ const deleteComment = asyncHandler(async (req, res) => {
 // @access  Private/Admin
 const createComment = asyncHandler(async (req, res) => {
   const comment = new Comment({
-    name: 'Sample name',
-    price: 0,
-    user: req.user._id,
-    image: '/images/sample.jpg',
-    brand: 'Sample brand',
-    category: 'Sample category',
-    countInStock: 0,
-    numReviews: 0,
-    description: 'Sample description',
+    text: 'my comment'
   })
 
-  const createdPost = await post.save()
-  res.status(201).json(createdPost)
+  const createdComment = await post.save()
+  res.status(201).json(createdComment)
 })
 
 // @desc    Update a product
@@ -76,6 +68,7 @@ const updateComment = asyncHandler(async (req, res) => {
 
 export {
   getCommentByPost,
+  createComment,
     deleteComment,
     updateComment
   }

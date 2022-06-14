@@ -10,7 +10,7 @@ import {
   listProductDetails,
   createProductReview,
 } from '../actions/productActions'
-import { PRODUCT_CREATE_REVIEW_RESET } from '../constants/productConstants'
+import { POST_CREATE_REVIEW_RESET } from '../constants/productConstants'
 
 const ProductScreen = ({ history, match }) => {
   const [qty, setQty] = useState(1)
@@ -39,7 +39,7 @@ const ProductScreen = ({ history, match }) => {
     }
     if (!product._id || product._id !== match.params.id) {
       dispatch(listProductDetails(match.params.id))
-      dispatch({ type: PRODUCT_CREATE_REVIEW_RESET })
+      dispatch({ type: POST_CREATE_REVIEW_RESET })
     }
   }, [dispatch, match, successProductReview])
 

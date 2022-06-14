@@ -6,10 +6,16 @@ import morgan from 'morgan'
 import { notFound, errorHandler } from './middleware/errorMiddleware.js'
 import connectDB from './config/db.js'
 
-import productRoutes from './routes/productRoutes.js'
+import postRoutes from './routes/postRoutes.js'
 import userRoutes from './routes/userRoutes.js'
 import orderRoutes from './routes/orderRoutes.js'
 import uploadRoutes from './routes/uploadRoutes.js'
+import categoryRoutes from './routes/categoryRoutes.js'
+import commentCoursePostRoutes from './routes/categoryRoutes.js'
+import commentsRoutes from './routes/categoryRoutes.js'
+import coursePostRoutes from './routes/categoryRoutes.js'
+import courseRoutes from './routes/categoryRoutes.js'
+
 
 dotenv.config()
 
@@ -23,10 +29,15 @@ if (process.env.NODE_ENV === 'development') {
 
 app.use(express.json())
 
-app.use('/api/products', productRoutes)
+app.use('/api/posts', postRoutes)
 app.use('/api/users', userRoutes)
 app.use('/api/orders', orderRoutes)
 app.use('/api/upload', uploadRoutes)
+app.use('/api/category', categoryRoutes)
+app.use('/api/comment_course_post', commentCoursePostRoutes)
+app.use('/api/comment', commentsRoutes)
+app.use('/api/course_post', coursePostRoutes)
+app.use('/api/course', courseRoutes)
 
 app.get('/api/config/paypal', (req, res) =>
   res.send(process.env.PAYPAL_CLIENT_ID)

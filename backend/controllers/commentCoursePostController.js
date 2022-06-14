@@ -1,12 +1,12 @@
 import asyncHandler from 'express-async-handler'
-import commentsCoursePost from '../models/commentsCoursePostModel.js'
+import Comment from '../models/commentsModel.js'
 
 
 // @desc    Fetch single product
 // @route   GET /api/products/:id
 // @access  Public
-const getCommentByCourse = asyncHandler(async (req, res) => {
-  const comment = await commentsCoursePost.findById(req.params.id)
+const getCommentsByCourse = asyncHandler(async (req, res) => {
+  const comment = await Comment.findById(req.params.id)
 
   if (comment) {
     res.json(comment)
@@ -20,7 +20,7 @@ const getCommentByCourse = asyncHandler(async (req, res) => {
 // @route   DELETE /api/products/:id
 // @access  Private/Admin
 const deleteComment = asyncHandler(async (req, res) => {
-  const post = await commentsCoursePost.findById(req.params.id)
+  const post = await Comment.findById(req.params.id)
 
   if (post) {
     await post.remove()
@@ -35,20 +35,12 @@ const deleteComment = asyncHandler(async (req, res) => {
 // @route   POST /api/products
 // @access  Private/Admin
 const createComment = asyncHandler(async (req, res) => {
-  const comment = new commentsCoursePost({
-    name: 'Sample name',
-    price: 0,
-    user: req.user._id,
-    image: '/images/sample.jpg',
-    brand: 'Sample brand',
-    category: 'Sample category',
-    countInStock: 0,
-    numReviews: 0,
-    description: 'Sample description',
+  const comment = new Comment({
+    text: 'my comment'
   })
 
-  const createdPost = await post.save()
-  res.status(201).json(createdPost)
+  const createdComment = await post.save()
+  res.status(201).json(createdComment)
 })
 
 // @desc    Update a product
@@ -60,12 +52,10 @@ const updateComment = asyncHandler(async (req, res) => {
     
   } = req.body
 
-  const comment = await commentsCoursePost.findById(req.params.id)
+  const comment = await Comment.findById(req.params.id)
 
   if (comment) {
     comment.text = text
-
-
     const updatedComment = await post.save()
     res.json(updatedComment)
   } else {
@@ -75,7 +65,8 @@ const updateComment = asyncHandler(async (req, res) => {
 })
 
 export {
-    getCommentByCourse,
+  getCommentByPost,
+  createComment,
     deleteComment,
     updateComment
   }
