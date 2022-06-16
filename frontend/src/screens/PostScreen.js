@@ -7,10 +7,10 @@ import Message from '../components/Message'
 import Loader from '../components/Loader'
 import Meta from '../components/Meta'
 import {
-  listProductDetails,
-  createProductReview,
-} from '../actions/productActions'
-import { POST_CREATE_REVIEW_RESET } from '../constants/productConstants'
+  listPostDetails,
+  
+} from '../actions/postActions'
+import { POST_CREATE_REVIEW_RESET } from '../constants/postConstants'
 
 const ProductScreen = ({ history, match }) => {
   const [qty, setQty] = useState(1)
@@ -19,43 +19,43 @@ const ProductScreen = ({ history, match }) => {
 
   const dispatch = useDispatch()
 
-  const productDetails = useSelector((state) => state.productDetails)
-  const { loading, error, product } = productDetails
+  const postDetails = useSelector((state) => state.postDetails)
+  const { loading, error, post } = postDetails
 
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
 
-  const productReviewCreate = useSelector((state) => state.productReviewCreate)
-  const {
-    success: successProductReview,
-    loading: loadingProductReview,
-    error: errorProductReview,
-  } = productReviewCreate
+  // const productReviewCreate = useSelector((state) => state.productReviewCreate)
+  // const {
+  //   success: successProductReview,
+  //   loading: loadingProductReview,
+  //   error: errorProductReview,
+  // } = productReviewCreate
 
   useEffect(() => {
-    if (successProductReview) {
-      setRating(0)
-      setComment('')
-    }
-    if (!product._id || product._id !== match.params.id) {
-      dispatch(listProductDetails(match.params.id))
+    // if (successProductReview) {
+    //   setRating(0)
+    //   setComment('')
+    // }
+    if (!post._id || post._id !== match.params.id) {
+      dispatch(listPostDetails(match.params.id))
       dispatch({ type: POST_CREATE_REVIEW_RESET })
     }
-  }, [dispatch, match, successProductReview])
+  }, [dispatch, match])
 
-  const addToCartHandler = () => {
-    history.push(`/cart/${match.params.id}?qty=${qty}`)
-  }
+  // const addToCartHandler = () => {
+  //   history.push(`/cart/${match.params.id}?qty=${qty}`)
+  // }
 
-  const submitHandler = (e) => {
-    e.preventDefault()
-    dispatch(
-      createProductReview(match.params.id, {
-        rating,
-        comment,
-      })
-    )
-  }
+  // const submitHandler = (e) => {
+  //   e.preventDefault()
+  //   dispatch(
+  //     createPostReview(match.params.id, {
+  //       rating,
+  //       comment,
+  //     })
+  //   )
+  // }
 
   return (
     <>
@@ -68,49 +68,49 @@ const ProductScreen = ({ history, match }) => {
         <Message variant='danger'>{error}</Message>
       ) : (
         <>
-          <Meta title={product.name} />
+          <Meta title={post.title} />
           <Row>
             <Col md={6}>
-              <Image src={product.image} alt={product.name} fluid />
+              <Image src={post.image} alt={post.title} fluid />
             </Col>
             <Col md={3}>
               <ListGroup variant='flush'>
                 <ListGroup.Item>
-                  <h3>{product.name}</h3>
+                  <h3>{post.title}</h3>
                 </ListGroup.Item>
                 <ListGroup.Item>
-                  <Rating
+                  {/* <Rating
                     value={product.rating}
                     text={`${product.numReviews} reviews`}
-                  />
+                  /> */}
                 </ListGroup.Item>
-                <ListGroup.Item>Price: ${product.price}</ListGroup.Item>
-                <ListGroup.Item>
+                {/* <ListGroup.Item>Price: ${product.price}</ListGroup.Item> */}
+                {/* <ListGroup.Item>
                   Description: {product.description}
-                </ListGroup.Item>
+                </ListGroup.Item> */}
               </ListGroup>
             </Col>
             <Col md={3}>
               <Card>
                 <ListGroup variant='flush'>
-                  <ListGroup.Item>
+                  {/* <ListGroup.Item>
                     <Row>
                       <Col>Price:</Col>
                       <Col>
                         <strong>${product.price}</strong>
                       </Col>
                     </Row>
-                  </ListGroup.Item>
+                  </ListGroup.Item> */}
 
                   <ListGroup.Item>
-                    <Row>
+                    {/* <Row>
                       <Col>Status:</Col>
                       <Col>
                         {product.countInStock > 0 ? 'In Stock' : 'Out Of Stock'}
                       </Col>
-                    </Row>
+                    </Row> */}
                   </ListGroup.Item>
-
+{/* 
                   {product.countInStock > 0 && (
                     <ListGroup.Item>
                       <Row>
@@ -132,14 +132,14 @@ const ProductScreen = ({ history, match }) => {
                         </Col>
                       </Row>
                     </ListGroup.Item>
-                  )}
+                  )} */}
 
                   <ListGroup.Item>
                     <Button
-                      onClick={addToCartHandler}
+                      // onClick={addToCartHandler}
                       className='btn-block'
                       type='button'
-                      disabled={product.countInStock === 0}
+                      // disabled={product.countInStock === 0}
                     >
                       Add To Cart
                     </Button>
@@ -149,7 +149,7 @@ const ProductScreen = ({ history, match }) => {
             </Col>
           </Row>
           <Row>
-            <Col md={6}>
+            {/* <Col md={6}>
               <h2>Reviews</h2>
               {product.reviews.length === 0 && <Message>No Reviews</Message>}
               <ListGroup variant='flush'>
@@ -213,7 +213,7 @@ const ProductScreen = ({ history, match }) => {
                   )}
                 </ListGroup.Item>
               </ListGroup>
-            </Col>
+            </Col> */}
           </Row>
         </>
       )}

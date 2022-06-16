@@ -6,11 +6,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import FormContainer from '../components/FormContainer'
-import { listProductDetails, updateProduct } from '../actions/productActions'
-import { POST_UPDATE_RESET } from '../constants/productConstants'
+import { listPostDetails, updatePost } from '../actions/postActions'
+import { POST_UPDATE_RESET } from '../constants/postConstants'
 
 const ProductEditScreen = ({ match, history }) => {
-  const productId = match.params.id
+  const postId = match.params.id
 
   const [name, setName] = useState('')
   const [price, setPrice] = useState(0)
@@ -23,34 +23,34 @@ const ProductEditScreen = ({ match, history }) => {
 
   const dispatch = useDispatch()
 
-  const productDetails = useSelector((state) => state.productDetails)
-  const { loading, error, product } = productDetails
+  const postDetails = useSelector((state) => state.postDetails)
+  const { loading, error, post } = postDetails
 
-  const productUpdate = useSelector((state) => state.productUpdate)
+  const postUpdate = useSelector((state) => state.postUpdate)
   const {
     loading: loadingUpdate,
     error: errorUpdate,
     success: successUpdate,
-  } = productUpdate
+  } = postUpdate
 
   useEffect(() => {
     if (successUpdate) {
       dispatch({ type: POST_UPDATE_RESET })
-      history.push('/admin/productlist')
+      history.push('/admin/postlist')
     } else {
-      if (!product.name || product._id !== productId) {
-        dispatch(listProductDetails(productId))
+      if (!post.name || post._id !== postId) {
+        dispatch(listPostDetails(postId))
       } else {
-        setName(product.name)
-        setPrice(product.price)
-        setImage(product.image)
-        setBrand(product.brand)
-        setCategory(product.category)
-        setCountInStock(product.countInStock)
-        setDescription(product.description)
+        setName(post.name)
+        setPrice(post.price)
+        setImage(post.image)
+        setBrand(post.brand)
+        setCategory(post.category)
+        setCountInStock(post.countInStock)
+        setDescription(post.description)
       }
     }
-  }, [dispatch, history, productId, product, successUpdate])
+  }, [dispatch, history, postId, post, successUpdate])
 
   const uploadFileHandler = async (e) => {
     const file = e.target.files[0]
@@ -78,8 +78,8 @@ const ProductEditScreen = ({ match, history }) => {
   const submitHandler = (e) => {
     e.preventDefault()
     dispatch(
-      updateProduct({
-        _id: productId,
+      updatePost({
+        _id: postId,
         name,
         price,
         image,
@@ -93,7 +93,7 @@ const ProductEditScreen = ({ match, history }) => {
 
   return (
     <>
-      <Link to='/admin/productlist' className='btn btn-light my-3'>
+      <Link to='/admin/postlist' className='btn btn-light my-3'>
         Go Back
       </Link>
       <FormContainer>

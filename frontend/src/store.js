@@ -2,14 +2,14 @@ import { createStore, combineReducers, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import {
-  productListReducer,
-  productDetailsReducer,
-  productDeleteReducer,
-  productCreateReducer,
-  productUpdateReducer,
-  productReviewCreateReducer,
-  productTopRatedReducer,
-} from './reducers/productReducers'
+  postListReducer,
+  postDetailsReducer,
+  postDeleteReducer,
+  postCreateReducer,
+  postUpdateReducer,
+  // postReviewCreateReducer,
+  // postTopRatedReducer,
+} from './reducers/postReducers'
 import { cartReducer } from './reducers/cartReducers'
 import {
   userLoginReducer,
@@ -29,14 +29,34 @@ import {
   orderListReducer,
 } from './reducers/orderReducers'
 
+
+import {
+  courseListReducer,
+  courseDetailsReducer,
+  courseDeleteReducer,
+  courseCreateReducer,
+  courseUpdateReducer
+} from './reducers/courseReducers'
+
+
+
 const reducer = combineReducers({
-  productList: productListReducer,
-  productDetails: productDetailsReducer,
-  productDelete: productDeleteReducer,
-  productCreate: productCreateReducer,
-  productUpdate: productUpdateReducer,
-  productReviewCreate: productReviewCreateReducer,
-  productTopRated: productTopRatedReducer,
+  postList: postListReducer,
+  postDetails: postDetailsReducer,
+  postDelete: postDeleteReducer,
+  postCreate: postCreateReducer,
+  postUpdate: postUpdateReducer,
+  // productReviewCreate: postReviewCreateReducer,
+  // productTopRated: postTopRatedReducer,
+
+  courseList: courseListReducer,
+  courseDetails: courseDetailsReducer,
+  courseDelete: courseDeleteReducer,
+  courseCreate: courseCreateReducer,
+  courseUpdate: courseUpdateReducer,
+  // productReviewCreate: postReviewCreateReducer,
+  // productTopRated: postTopRatedReducer,
+
   cart: cartReducer,
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,

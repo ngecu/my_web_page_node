@@ -10,7 +10,7 @@ import {
 } from '../controllers/postController.js'
 import { protect, admin } from '../middleware/authMiddleware.js'
 
-router.route('/').get(getPosts).post(protect, admin, createPost)
+router.route('/').get(getPosts).post(createPost)
 router.get('/top', getTopPosts)
 router
   .route('/:id')

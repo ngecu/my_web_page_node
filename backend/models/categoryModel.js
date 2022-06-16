@@ -1,23 +1,23 @@
 import mongoose from 'mongoose'
-import { String } from 'mongoose/lib/schema/index'
+import { String } from 'mongoose/lib/schema/index.js'
 
 const categorySchema = mongoose.Schema(
   {
     
     name: {
       type: String,
-      required: true,
+      // required: true,
     },
     color: {
       type: String,
-      required: true,
+      // required: true,
     },
     slug: {
       type: String,
     },
     image: {
       type: String,
-      required: true,
+      // required: true,
     },
   },
   {

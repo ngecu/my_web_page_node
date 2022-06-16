@@ -14,7 +14,7 @@ import categoryRoutes from './routes/categoryRoutes.js'
 import commentCoursePostRoutes from './routes/categoryRoutes.js'
 import commentsRoutes from './routes/categoryRoutes.js'
 import coursePostRoutes from './routes/categoryRoutes.js'
-import courseRoutes from './routes/categoryRoutes.js'
+import courseRoutes from './routes/courseRoutes.js'
 
 
 dotenv.config()

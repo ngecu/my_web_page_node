@@ -20,78 +20,72 @@ const getCourses = asyncHandler(async (req, res) => {
     : {}
 
   const count = await Course.countDocuments({ ...keyword })
-  const posts = await Course.find({ ...keyword })
+  const courses = await Course.find({ ...keyword })
     .limit(pageSize)
     .skip(pageSize * (page - 1))
 
-  res.json({ posts, page, pages: Math.ceil(count / pageSize) })
+  res.json({ courses, page, pages: Math.ceil(count / pageSize) })
 })
-
-
 
 // @desc    Delete a product
 // @route   DELETE /api/products/:id
 // @access  Private/Admin
 const deleteCourse = asyncHandler(async (req, res) => {
-  const post = await Course.findById(req.params.id)
+  const course = await Course.findById(req.params.id)
 
-  if (post) {
-    await post.remove()
-    res.json({ message: 'Post removed' })
+  if (course) {
+    await course.remove()
+    res.json({ message: 'course removed' })
   } else {
     res.status(404)
-    throw new Error('Post not found')
+    throw new Error('course not found')
   }
 })
 
 // @desc    Create a product
 // @route   POST /api/products
 // @access  Private/Admin
-const createComment = asyncHandler(async (req, res) => {
-  const comment = new Course({
-    name: 'Sample name',
-    price: 0,
-    user: req.user._id,
-    image: '/images/sample.jpg',
-    brand: 'Sample brand',
-    category: 'Sample category',
-    countInStock: 0,
-    numReviews: 0,
-    description: 'Sample description',
-  })
+const createCourse = asyncHandler(async (req, res) => {
 
-  const createdPost = await post.save()
-  res.status(201).json(createdPost)
+const {user,name,image,category,description,reviews,price} = req.body;
+
+  const course = new Course({user,name,image,category,description,reviews,price })
+
+  const createdCourse = await course.save()
+  res.status(201).json(createdCourse)
 })
 
 // @desc    Update a product
 // @route   PUT /api/products/:id
 // @access  Private/Admin
 const updateCourse = asyncHandler(async (req, res) => {
-  const {
-    text
-    
-  } = req.body
+  const {name,image,category,description,reviews,rating,numReviews,price} = req.body
 
-  const comment = await Course.findById(req.params.id)
+  const course = await Course.findById(req.params.id)
 
-  if (comment) {
-    comment.text = text
+  if (course) {
+    course.name = name
+    course.image = image
+    course.category = category
+    course.description = description
+    course.reviews = reviews
+    course.rating = rating
+    course.numReviews = numReviews
+    course.price = price
 
-
-    const updatedComment = await post.save()
-    res.json(updatedComment)
+    const updatedCourse = await course.save()
+    res.json(updatedCourse)
   } else {
     res.status(404)
-    throw new Error('Comment not found')
+    throw new Error('Cuorse not found')
   }
 })
 
 export {
   getCourses,
-  createComment,
-    deleteCourse,
-    updateCourse
+  createCourse,
+  deleteCourse,
+  updateCourse
   }
   
 

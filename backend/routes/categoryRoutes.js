@@ -15,6 +15,6 @@ router
   .route('/:id')
   .get(getCategoryById)
   .delete(protect, admin, deleteCategory)
-  .put(protect, admin, updateCategory)
+  .put(updateCategory)
 
 export default router

@@ -10,7 +10,7 @@ import {
   deleteProduct,
   createProduct,
 } from '../actions/productActions'
-import { POST_CREATE_RESET } from '../constants/productConstants'
+import { COURSE_CREATE_RESET } from '../constants/courseConstants'
 
 const ProductListScreen = ({ history, match }) => {
   const pageNumber = match.params.pageNumber || 1
@@ -39,7 +39,7 @@ const ProductListScreen = ({ history, match }) => {
   const { userInfo } = userLogin
 
   useEffect(() => {
-    dispatch({ type: POST_CREATE_RESET })
+    dispatch({ type: COURSE_CREATE_RESET })
 
     if (!userInfo || !userInfo.isAdmin) {
       history.push('/login')
