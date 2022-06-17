@@ -83,7 +83,7 @@ const HomeScreen = ({ match }) => {
             ))}
 
 {courses.length == 0 &&  
-            <Col key={post._id} sm={12} md={6} lg={4} xl={3}>
+            <Col  sm={12} md={6} lg={4} xl={3}>
             <Alert key="danger" variant="danger">
      No Courses available Currently
     </Alert>
