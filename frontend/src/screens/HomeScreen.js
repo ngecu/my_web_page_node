@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { Row, Col } from 'react-bootstrap'
+import { Row, Col,Alert } from 'react-bootstrap'
 import Post from '../components/Post'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
@@ -53,7 +53,7 @@ const HomeScreen = ({ match }) => {
             ))}
 
             {posts.length == 0 &&  
-             <Col key={post._id} sm={12} md={6} lg={4} xl={3}>
+             <Col sm={12} md={6} lg={4} xl={3}>
             <Alert key="danger" variant="danger">
      No Posts Currently
     </Alert>
