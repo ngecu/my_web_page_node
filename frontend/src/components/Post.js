@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { Card } from 'react-bootstrap'
 import Rating from './Rating'
 
-const Product = ({ post }) => {
+const Post = ({ post }) => {
   return (
     <Card className='my-3 p-3 rounded'>
       <Link to={`/post/${post._id}`}>
@@ -16,18 +16,9 @@ const Product = ({ post }) => {
             <strong>{post.title}</strong>
           </Card.Title>
         </Link>
-
-        <Card.Text as='div'>
-          <Rating
-            value={post.rating}
-            text={`${post.numReviews} reviews`}
-          />
-        </Card.Text>
-
-        <Card.Text as='h3'>${post.price}</Card.Text>
       </Card.Body>
     </Card>
   )
 }
 
-export default Product
+export default Post

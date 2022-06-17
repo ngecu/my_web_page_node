@@ -46,11 +46,19 @@ const HomeScreen = ({ match }) => {
       ) : (
         <>
           <Row>
-            {posts.map((post) => (
+            {posts.length > 0 && posts.map((post) => (
               <Col key={post._id} sm={12} md={6} lg={4} xl={3}>
                 <Post post={post} />
               </Col>
             ))}
+
+            {posts.length == 0 &&  
+             <Col key={post._id} sm={12} md={6} lg={4} xl={3}>
+            <Alert key="danger" variant="danger">
+     No Posts Currently
+    </Alert>
+    </Col>
+            }
           </Row>
           <Paginate
             pages={pages}
@@ -73,6 +81,15 @@ const HomeScreen = ({ match }) => {
                 <Course course={course} />
               </Col>
             ))}
+
+{courses.length == 0 &&  
+            <Col key={post._id} sm={12} md={6} lg={4} xl={3}>
+            <Alert key="danger" variant="danger">
+     No Courses available Currently
+    </Alert>
+    </Col>
+            }
+
           </Row>
           <Paginate
             pages={pages}

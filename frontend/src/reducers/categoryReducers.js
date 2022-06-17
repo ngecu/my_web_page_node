@@ -18,14 +18,14 @@ import {
     CATEGORY_UPDATE_RESET
   } from '../constants/categoryConstants'
   
-  export const categoryListReducer = (state = { products: [] }, action) => {
+  export const categoryListReducer = (state = { categories: [] }, action) => {
     switch (action.type) {
       case CATEGORY_LIST_REQUEST:
-        return { loading: true, products: [] }
+        return { loading: true, categories: [] }
       case CATEGORY_LIST_SUCCESS:
         return {
           loading: false,
-          products: action.payload.products,
+          categories: action.payload.categories,
           pages: action.payload.pages,
           page: action.payload.page,
         }
@@ -37,14 +37,14 @@ import {
   }
   
   export const categoryDetailsReducer = (
-    state = { product: { reviews: [] } },
+    state = { category: { reviews: [] } },
     action
   ) => {
     switch (action.type) {
       case CATEGORY_DETAILS_REQUEST:
         return { ...state, loading: true }
       case CATEGORY_DETAILS_SUCCESS:
-        return { loading: false, product: action.payload }
+        return { loading: false, category: action.payload }
       case CATEGORY_DETAILS_FAIL:
         return { loading: false, error: action.payload }
       default:
@@ -70,7 +70,7 @@ import {
       case CATEGORY_CREATE_REQUEST:
         return { loading: true }
       case CATEGORY_CREATE_SUCCESS:
-        return { loading: false, success: true, product: action.payload }
+        return { loading: false, success: true, category: action.payload }
       case CATEGORY_CREATE_FAIL:
         return { loading: false, error: action.payload }
       case CATEGORY_CREATE_RESET:
@@ -80,16 +80,16 @@ import {
     }
   }
   
-  export const categoryUpdateReducer = (state = { product: {} }, action) => {
+  export const categoryUpdateReducer = (state = { category: {} }, action) => {
     switch (action.type) {
       case CATEGORY_UPDATE_REQUEST:
         return { loading: true }
       case CATEGORY_UPDATE_SUCCESS:
-        return { loading: false, success: true, product: action.payload }
+        return { loading: false, success: true, category: action.payload }
       case CATEGORY_UPDATE_FAIL:
         return { loading: false, error: action.payload }
       case CATEGORY_UPDATE_RESET:
-        return { product: {} }
+        return { category: {} }
       default:
         return state
     }
