@@ -25,6 +25,10 @@ import {
   USER_UPDATE_SUCCESS,
   USER_UPDATE_FAIL,
   USER_UPDATE_PROFILE_RESET,
+  AUTHOR_LIST_REQUEST,
+  AUTHOR_LIST_SUCCESS,
+  AUTHOR_LIST_FAIL,
+  AUTHOR_LIST_RESET
 } from '../constants/userConstants'
 
 export const userLoginReducer = (state = {}, action) => {
@@ -127,6 +131,23 @@ export const userUpdateReducer = (state = { user: {} }, action) => {
       return {
         user: {},
       }
+    default:
+      return state
+  }
+}
+
+
+
+export const authorListReducer = (state = { author: {} }, action) => {
+  switch (action.type) {
+    case AUTHOR_LIST_REQUEST:
+      return { loading: true }
+    case AUTHOR_LIST_SUCCESS:
+      return { loading: false, author: action.payload }
+    case AUTHOR_LIST_FAIL:
+      return { loading: false, error: action.payload }
+    case AUTHOR_LIST_RESET:
+      return { author: {} }
     default:
       return state
   }

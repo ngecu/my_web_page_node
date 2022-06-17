@@ -18,12 +18,19 @@ import PostListScreen from './screens/PostListScreen'
 import PostEditScreen from './screens/PostEditScreen'
 import OrderListScreen from './screens/OrderListScreen'
 
+import TagPostScreen from './screens/TagPostScreen';
+import NewPostScreen from "./screens/NewPostScreen";
+
 const App = () => {
   return (
     <Router>
       <Header />
       <main className='py-3'>
         <Container>
+        <Route path='/tag/:id' component={TagPostScreen} />
+            <Route path='/newPost' component={NewPostScreen} />
+
+
           <Route path='/order/:id' component={OrderScreen} />
         
           <Route path='/payment' component={PaymentScreen} />

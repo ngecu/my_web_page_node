@@ -15,7 +15,7 @@ router.get('/top', getTopPosts)
 router
   .route('/:id')
   .get(getPostById)
-  .delete(protect, admin, deletePost)
+  .delete(deletePost)
   .put(protect, admin, updatePost)
 
 export default router

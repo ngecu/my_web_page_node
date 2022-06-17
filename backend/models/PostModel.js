@@ -20,10 +20,7 @@ const postSchema = mongoose.Schema(
         type: String,
         required: true,
       },
-      slug: {
-        type: String,
-        required: true,
-      },
+    
       image: {
         type: String,
         required: true,
@@ -32,9 +29,13 @@ const postSchema = mongoose.Schema(
         type: String,
         required: true,
       },
+      description: {
+        type: String,
+        // required: true,
+      },
       published: {
         type: Boolean,
-        required: true,
+        // required: true,
         default:false
       },
    

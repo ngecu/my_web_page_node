@@ -63,6 +63,8 @@ const createPost = asyncHandler(async (req, res) => {
 
   const post = new Post({user,category,title,slug,image,body})
 
+  console.log("i am post is ",post)
+
   const createdPost = await post.save()
   res.status(201).json(createdPost)
 })

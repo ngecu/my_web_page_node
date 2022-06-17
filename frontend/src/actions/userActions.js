@@ -24,6 +24,10 @@ import {
   USER_UPDATE_FAIL,
   USER_UPDATE_SUCCESS,
   USER_UPDATE_REQUEST,
+  AUTHOR_LIST_REQUEST, 
+  AUTHOR_LIST_SUCCESS, 
+  AUTHOR_LIST_FAIL
+  
 } from '../constants/userConstants'
 import { ORDER_LIST_MY_RESET } from '../constants/orderConstants'
 
@@ -299,6 +303,35 @@ export const updateUser = (user) => async (dispatch, getState) => {
     }
     dispatch({
       type: USER_UPDATE_FAIL,
+      payload: message,
+    })
+  }
+}
+
+
+export const getAuthorDetails = (id) => async (dispatch, getState) => {
+
+  try {
+    dispatch({
+      type: AUTHOR_LIST_REQUEST,
+    })
+
+    const { data } = await axios.get(`/api/users/author/${id}`)
+    console.log("user is",data)
+    dispatch({
+      type: AUTHOR_LIST_SUCCESS,
+      payload: data,
+    })
+  } catch (error) {
+    const message =
+        error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message
+    if (message === 'Not authorized, token failed') {
+      dispatch(logout())
+    }
+    dispatch({
+      type: AUTHOR_LIST_FAIL,
       payload: message,
     })
   }

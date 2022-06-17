@@ -5,8 +5,6 @@ import Category from '../models/categoryModel.js'
 // @route   GET /api/products
 // @access  Public
 const getCategories = asyncHandler(async (req, res) => {
-
-  // const count = await Category.countDocuments({ ...keyword })
   const categories = await Category.find()
 
   res.json({ categories })

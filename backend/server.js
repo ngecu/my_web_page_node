@@ -15,6 +15,7 @@ import commentCoursePostRoutes from './routes/categoryRoutes.js'
 import commentsRoutes from './routes/categoryRoutes.js'
 import coursePostRoutes from './routes/categoryRoutes.js'
 import courseRoutes from './routes/courseRoutes.js'
+import tagRoutes from './routes/tagRoutes.js'
 
 
 dotenv.config()
@@ -38,6 +39,8 @@ app.use('/api/comment_course_post', commentCoursePostRoutes)
 app.use('/api/comment', commentsRoutes)
 app.use('/api/course_post', coursePostRoutes)
 app.use('/api/course', courseRoutes)
+
+app.use('/api/tags', tagRoutes)
 
 app.get('/api/config/paypal', (req, res) =>
   res.send(process.env.PAYPAL_CLIENT_ID)
