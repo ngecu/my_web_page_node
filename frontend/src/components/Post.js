@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { Card } from 'react-bootstrap'
-import '../screens/CSS/Medium.css';
+import '../screens/CSS/mediumish.css';
 
 const Post = ({ post }) => {
   const x = post.body;
