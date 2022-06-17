@@ -76,11 +76,12 @@ const PostScreen = ({ match }) => {
 
                             <Col md={12} xs={12} className="col-md-offset-2">
                                 <div className="after-post-tags">
-                                    <Tag date={post?.createdAt} tags={post?.tags} />
-                                    {/* <span>{post?.createdAt?.substring(0, 10)}</span> */}
+                                    
+                                    
                                     </div>
                                 <Col className="mainheading">
                                     <h1 className="posttitle">{post?.title}</h1>
+                                    <span>{post?.createdAt?.substring(0, 10)}</span>
                                     <Author author={post?.author} />
 
                                 </Col>

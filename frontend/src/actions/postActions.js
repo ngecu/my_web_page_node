@@ -18,7 +18,13 @@ import {
   POST_CREATE_FAIL,
   POST_UPDATE_REQUEST,
   POST_UPDATE_SUCCESS,
-  POST_UPDATE_FAIL
+  POST_UPDATE_FAIL,
+
+  POST_LIST_MY_REQUEST,
+  POST_LIST_MY_SUCCESS,
+  POST_LIST_MY_FAIL,
+
+
 } from '../constants/postConstants'
 import { logout } from './userActions'
 
@@ -228,6 +234,46 @@ export const createPostAction = (formData) => async (dispatch, getState) => {
     }
     dispatch({
       type: FAIL_CREATE_POSTS,
+      payload: message,
+    })
+  }
+}
+
+
+export const listMyPosts = (id) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: POST_LIST_MY_REQUEST,
+    })
+
+    const {
+      userLogin: { userInfo },
+    } = getState()
+
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    }
+
+    const { data } = await axios.get(`/api/posts/author/${id}`, config)
+
+
+    dispatch({
+      type: POST_LIST_MY_SUCCESS,
+      payload: data,
+    })
+  } catch (error) {
+    const message =
+        error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message
+    if (message === 'Not authorized, token failed') {
+      dispatch(logout())
+    }
+    dispatch({
+      type: POST_LIST_MY_FAIL,
       payload: message,
     })
   }

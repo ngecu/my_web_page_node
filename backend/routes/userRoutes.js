@@ -9,9 +9,11 @@ import {
   deleteUser,
   getUserById,
   updateUser,
+  authorProfile
 } from '../controllers/userController.js'
 import { protect, admin } from '../middleware/authMiddleware.js'
 
+router.route('/author/:authorid').get(authorProfile)
 router.route('/').post(registerUser).get(getUsers)
 router.post('/login', authUser)
 router

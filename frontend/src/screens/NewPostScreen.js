@@ -96,7 +96,7 @@ const NewPostScreen = ({ location, history }) => {
                 },
             }
 
-            const { data } = await axios.post('/api/upload/posts', formData, config)
+            const { data } = await axios.post('/api/upload', formData, config)
             setphoto(data)
 
             setUploading(false)

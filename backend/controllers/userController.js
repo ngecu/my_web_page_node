@@ -166,6 +166,19 @@ const updateUser = asyncHandler(async (req, res) => {
   }
 })
 
+
+const authorProfile = asyncHandler(async (req, res) => {
+
+  const user = await User.findOne({_id:req.params.authorid})
+  console.log(user)
+  if (user) {
+    res.json(user)
+  } else {
+    res.status(404)
+    throw new Error('User not found')
+  }
+})
+
 export {
   authUser,
   registerUser,
@@ -175,4 +188,5 @@ export {
   deleteUser,
   getUserById,
   updateUser,
+  authorProfile
 }

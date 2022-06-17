@@ -3,9 +3,9 @@ import express from 'express'
 import multer from 'multer'
 const router = express.Router()
 
-const storage_posts = multer.diskStorage({
+const storage = multer.diskStorage({
   destination(req, file, cb) {
-    cb(null, 'uploads/posts')
+    cb(null, 'uploads/')
   },
   filename(req, file, cb) {
     cb(
@@ -28,13 +28,13 @@ function checkFileType(file, cb) {
 }
 
 const upload = multer({
-  storage_posts,
+  storage,
   fileFilter: function (req, file, cb) {
     checkFileType(file, cb)
   },
 })
 
-router.post('/posts', upload.single('image'), (req, res) => {
+router.post('/', upload.single('image'), (req, res) => {
   res.send(`/${req.file.path}`)
 })
 

@@ -7,6 +7,7 @@ import {
   postDeleteReducer,
   postCreateReducer,
   postUpdateReducer,
+  postListMyReducer,
   // postReviewCreateReducer,
   // postTopRatedReducer,
 } from './reducers/postReducers'
@@ -50,6 +51,7 @@ import{
 
 const reducer = combineReducers({
   postList: postListReducer,
+  postlistMy:postListMyReducer,
   postDetails: postDetailsReducer,
   postDelete: postDeleteReducer,
   postCreate: postCreateReducer,

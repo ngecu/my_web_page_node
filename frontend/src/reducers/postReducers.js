@@ -23,6 +23,13 @@ import {
   POST_TOP_REQUEST,
   POST_TOP_SUCCESS,
   POST_TOP_FAIL,
+
+
+  POST_LIST_MY_REQUEST,
+  POST_LIST_MY_SUCCESS,
+  POST_LIST_MY_FAIL,
+  POST_LIST_MY_RESET
+
 } from '../constants/postConstants'
 
 export const postListReducer = (state = { posts: [] }, action) => {
@@ -125,6 +132,29 @@ export const postTopRatedReducer = (state = { posts: [] }, action) => {
       return { loading: false, posts: action.payload }
     case POST_TOP_FAIL:
       return { loading: false, error: action.payload }
+    default:
+      return state
+  }
+}
+
+
+export const postListMyReducer = (state = { posts: [] }, action) => {
+  switch (action.type) {
+    case POST_LIST_MY_REQUEST:
+      return {
+        loading: true,
+      }
+    case POST_LIST_MY_SUCCESS:
+      return {
+        loading: false,
+        posts: action.payload,
+      }
+    case POST_LIST_MY_FAIL:
+      return {
+        loading: false,
+        error: action.payload,
+      }
+
     default:
       return state
   }

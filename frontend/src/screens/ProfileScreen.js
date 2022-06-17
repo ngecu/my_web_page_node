@@ -8,6 +8,10 @@ import { getUserDetails, updateUserProfile } from '../actions/userActions'
 import { listMyOrders } from '../actions/orderActions'
 import { USER_UPDATE_PROFILE_RESET } from '../constants/userConstants'
 
+
+import {deletePost, listMyPosts} from '../actions/postActions'
+
+
 const ProfileScreen = ({ location, history }) => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
@@ -29,6 +33,10 @@ const ProfileScreen = ({ location, history }) => {
   const orderListMy = useSelector((state) => state.orderListMy)
   const { loading: loadingOrders, error: errorOrders, orders } = orderListMy
 
+
+  const postListMy = useSelector((state) => state.postlistMy)
+  const { loading: loadingPosts, error: errorPosts, posts } = postListMy
+
   useEffect(() => {
     if (!userInfo) {
       history.push('/login')
@@ -37,12 +45,25 @@ const ProfileScreen = ({ location, history }) => {
         dispatch({ type: USER_UPDATE_PROFILE_RESET })
         dispatch(getUserDetails('profile'))
         dispatch(listMyOrders())
+        dispatch(listMyPosts(userInfo._id))
       } else {
         setName(user.name)
         setEmail(user.email)
       }
     }
   }, [dispatch, history, userInfo, user, success])
+
+  const deleteHandler = (id) => {
+    if (window.confirm('Are you sure')) {
+      dispatch(deletePost(id))
+
+      
+      setTimeout(() => { 
+          history.push('/');
+        }, 5000)
+
+    }
+  }
 
   const submitHandler = (e) => {
     e.preventDefault()
@@ -113,56 +134,54 @@ const ProfileScreen = ({ location, history }) => {
         )}
       </Col>
       <Col md={9}>
-        <h2>My Orders</h2>
-        {loadingOrders ? (
+        <h2>My Blogs</h2>
+        {loadingPosts ? (
           <Loader />
-        ) : errorOrders ? (
-          <Message variant='danger'>{errorOrders}</Message>
+        ) : errorPosts ? (
+          <Message variant='danger'>{errorPosts}</Message>
         ) : (
           <Table striped bordered hover responsive className='table-sm'>
             <thead>
               <tr>
                 <th>ID</th>
+                <th>NAME</th>
                 <th>DATE</th>
-                <th>TOTAL</th>
-                <th>PAID</th>
-                <th>DELIVERED</th>
                 <th></th>
               </tr>
             </thead>
             <tbody>
-              {orders.map((order) => (
-                <tr key={order._id}>
-                  <td>{order._id}</td>
-                  <td>{order.createdAt.substring(0, 10)}</td>
-                  <td>{order.totalPrice}</td>
+              {posts.map((post) => (
+                <tr key={post._id}>
+                  <td>{post._id}</td>
+                  <td>{post.title}</td>
+                  <td>{post.createdAt.substring(0, 10)}</td>
                   <td>
-                    {order.isPaid ? (
-                      order.paidAt.substring(0, 10)
-                    ) : (
-                      <i className='fas fa-times' style={{ color: 'red' }}></i>
-                    )}
-                  </td>
-                  <td>
-                    {order.isDelivered ? (
-                      order.deliveredAt.substring(0, 10)
-                    ) : (
-                      <i className='fas fa-times' style={{ color: 'red' }}></i>
-                    )}
-                  </td>
-                  <td>
-                    <LinkContainer to={`/order/${order._id}`}>
+                    <LinkContainer to={`/admin/post/${post._id}/edit`}>
+                      <Button variant='light' className='btn-sm'>
+                        <i className='fas fa-edit'></i>
+                      </Button>
+                    </LinkContainer>
+                    <Button
+                        variant='danger'
+                        className='btn-sm'
+                        onClick={() => deleteHandler(post._id)}
+                    >
+                      <i className='fas fa-trash'></i>
+                    </Button>
+                    <LinkContainer to={`/post/${post._id}`}>
                       <Button className='btn-sm' variant='light'>
-                        Details
+                        View
                       </Button>
                     </LinkContainer>
                   </td>
+             
                 </tr>
               ))}
             </tbody>
           </Table>
         )}
       </Col>
+  
     </Row>
   )
 }
