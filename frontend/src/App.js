@@ -20,6 +20,8 @@ import OrderListScreen from './screens/OrderListScreen'
 
 import TagPostScreen from './screens/TagPostScreen';
 import NewPostScreen from "./screens/NewPostScreen";
+import NewCourseScreen from "./screens/NewCourseScreen";
+
 
 const App = () => {
   return (
@@ -29,7 +31,9 @@ const App = () => {
         <Container>
         <Route path='/tag/:id' component={TagPostScreen} />
             <Route path='/newPost' component={NewPostScreen} />
+            <Route path='/newCourse' component={NewCourseScreen} />
 
+            
 
           <Route path='/order/:id' component={OrderScreen} />
         

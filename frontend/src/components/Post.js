@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { Card } from 'react-bootstrap'
 import '../screens/CSS/mediumish.css';
+import { Markup } from 'interweave';
 
 const Post = ({ post }) => {
   const x = post.body;
@@ -12,9 +13,10 @@ const Post = ({ post }) => {
   <Card.Img variant='top' src={post.image} />
   </Link>
   <Card.Body>
-    <Card.Title>{post.title}</Card.Title>
+    <Card.Title>{post.title.substring(0,9)}</Card.Title>
     <Card.Text>
-     {x.substring(0, 5)}
+    <Markup content={x.substring(0, 5)} />
+     
     </Card.Text>
     <div className="metafooter">
 					<div className="wrapfooter">

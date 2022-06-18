@@ -38,6 +38,12 @@ const postSchema = mongoose.Schema(
         // required: true,
         default:false
       },
+
+      comments:[
+        {type: mongoose.Schema.Types.ObjectId,
+            ref: 'Comment'
+        }
+    ],
    
     },
     {

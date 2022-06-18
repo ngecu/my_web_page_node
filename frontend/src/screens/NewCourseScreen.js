@@ -10,36 +10,36 @@ import Loader from '../components/Loader'
 
 import FormContainer from '../components/FormContainer'
 import { createCourse } from '../actions/courseActions'
-import { getTagsAction } from '../actions/tagActions'
+// import { getTagsAction } from '../actions/tagActions'
+import { listCategories } from '../actions/categoryActions'
 
 import JoditEditor from "jodit-react";
 
 import {COURSE_CREATE_RESET} from '../constants/courseConstants'
 
 
-
 const NewCourseScreen = ({ location, history }) => {
-    const [body, settext] = useState('')
-    const [title, settitle] = useState('')
-    const [category, setcategory] = useState('62ac8a75e1b4a62e1468f066')
+    const [name, setname] = useState('')
+    const [image, setimage] = useState('')
+    const [category, setcategory] = useState('')
 
-    const [uploading,setUploading]= useState(false)
-    const [image, setphoto] = useState('')
-    const [tag, setTag] = useState([])
     const [description, setdescription] = useState('')
     const [price,setprice] = useState('')
-    
-    const postCreate = useSelector((state) => state.postCreate)
-    const readTags = useSelector((state)=>state.readTags)
 
+    const [uploading,setUploading]= useState(false)
+   
+    const courseCreate = useSelector((state) => state.courseCreate)
+    const readCategories = useSelector((state)=>state.readCategories)
 
+    const categoryList = useSelector((state) => state.courseList)
+    const { loading_category, error_category, categories } = categoryList
+  
     const {
-        loading: loadingCreate,
+        loading: loadingCategries,
         error: errorCreate,
         success: successCreate,
-        product: createdProduct,
-    } = postCreate
-
+        product: createdCourse,
+    } = courseCreate
 
     const editor = useRef(null)
     const [content, setContent] = useState('')
@@ -48,13 +48,9 @@ const NewCourseScreen = ({ location, history }) => {
         readonly: false // all options from https://xdsoft.net/jodit/doc/
     }
 
-
     const dispatch = useDispatch()
 
-
-
     const redirect = location.search ? location.search.split('=')[1] : '/'
-
 
     const userLogin = useSelector((state) => state.userLogin)
     const { userInfo } = userLogin
@@ -62,7 +58,7 @@ const NewCourseScreen = ({ location, history }) => {
     const user = userInfo._id
 
     useEffect(() => {
-        dispatch(getTagsAction())
+        dispatch(listCategories())
         dispatch({type:COURSE_CREATE_RESET})
         if (!userInfo){
             history.push('/login')
@@ -91,7 +87,7 @@ const NewCourseScreen = ({ location, history }) => {
             }
 
             const { data } = await axios.post('/api/upload', formData, config)
-            setphoto(data)
+            setimage(data)
 
             setUploading(false)
 
@@ -102,7 +98,7 @@ const NewCourseScreen = ({ location, history }) => {
     }
 
     const s = {
-        body,title,image,description,user,category
+       name,image,category,description
     }
 
     const submitHandler = (e) => {
@@ -125,7 +121,7 @@ const  handleChange=(e)=> {
         for (let i = 0; i < selectedOption.length; i++){
             selected.push(selectedOption.item(i).value)
         }
-        setTag(selected)
+        setcategory(selected)
     }
 
  
@@ -148,9 +144,9 @@ const  handleChange=(e)=> {
                     <Form.Control
                         type='text'
                         placeholder='Enter Title'
-                        value={title}
+                        value={name}
                         required
-                        onChange={(e) => settitle(e.target.value)}
+                        onChange={(e) => setname(e.target.value)}
                     ></Form.Control>
                 </Form.Group>
 
@@ -192,17 +188,17 @@ const  handleChange=(e)=> {
                 </Form.Group>
 
 
-                {/* <Form.Group controlId='image'>
+                <Form.Group controlId='image'>
                     <Form.Label>Tags <br/> </Form.Label>
 
-                    <select multiple onChange={handleChange.bind(this)} required >
+                    <select  onChange={handleChange.bind(this)} required >
                         {
-                            tags.map(item => (
+                            categories.map(item => (
                                 <option value={item?._id}>{item.name}</option>
                             ))
                         }
                     </select>
-                </Form.Group> */}
+                </Form.Group>
 
                 {/* <Editor
                     name={body}

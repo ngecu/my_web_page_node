@@ -21,6 +21,7 @@ const getPosts = asyncHandler(async (req, res) => {
   const posts = await Post.find({ ...keyword })
     .limit(pageSize)
     .skip(pageSize * (page - 1))
+    .populate("user")
 
   res.json({ posts, page, pages: Math.ceil(count / pageSize) })
 })

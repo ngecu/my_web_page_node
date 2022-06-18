@@ -11,7 +11,6 @@ import { listPosts } from '../actions/postActions'
 import { listCourses } from '../actions/courseActions'
 import Course from '../components/Course'
 
-
 const HomeScreen = ({ match }) => {
   const keyword = match.params.keyword
 

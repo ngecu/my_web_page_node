@@ -57,7 +57,18 @@ const courseSchema = mongoose.Schema(
         type: Number,
         required: true,
         default: 0,
+      },
+      coursePosts:[
+        {type: mongoose.Schema.Types.ObjectId,
+            ref: 'Coursepost'
+        }
+    ],
+    comments:[
+      {type: mongoose.Schema.Types.ObjectId,
+          ref: 'commentsCoursePost'
       }
+  ],
+
     },
     {
       timestamps: true,

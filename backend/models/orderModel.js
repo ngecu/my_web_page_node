@@ -8,17 +8,11 @@ const orderSchema = mongoose.Schema(
       ref: 'User',
     },
     courseItems: [
-      {
-        name: { type: String, required: true },
-        qty: { type: Number, required: true },
-        image: { type: String, required: true },
-        price: { type: Number, required: true },
-        course: {
+         {
           type: mongoose.Schema.Types.ObjectId,
           required: true,
           ref: 'Course',
         },
-      },
     ],
     paymentMethod: {
       type: String,
@@ -37,15 +31,7 @@ const orderSchema = mongoose.Schema(
     },
     paidAt: {
       type: Date,
-    },
-    isDelivered: {
-      type: Boolean,
-      required: true,
-      default: false,
-    },
-    deliveredAt: {
-      type: Date,
-    },
+    }
   },
   {
     timestamps: true,
