@@ -97,15 +97,13 @@ const PostScreen = ({ match }) => {
                                 </div>
                             </Col>
 
-                            <Col md={11} xs={12} className="col-md-offset-2">
-                                <div className="after-post-tags">
-                                    
-                                    
-                                    </div>
+                            <Col md={7} xs={12} className="col-md-offset-2 border border-secondary">
+                              
                                 <Col className="mainheading">
-                                    <h1 className="posttitle">{post?.title}</h1>
+
+                                    <h1 className="posttitle"> <strong> {post?.title} </strong></h1>
                                     <span>{post?.createdAt?.substring(0, 10)}</span>
-                                    <Author author={post?.author} />
+                                    <Author author={post?.user} post={post} />
 
                                 </Col>
 
@@ -126,7 +124,7 @@ const PostScreen = ({ match }) => {
 
                             </Col>
                         <Col md={3}>
-                        
+                        I am Author Details Section
                         </Col>
                         </Row>
                         </Container>
