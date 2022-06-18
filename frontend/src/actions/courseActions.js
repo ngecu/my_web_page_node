@@ -100,7 +100,7 @@ export const deleteCourse = (id) => async (dispatch, getState) => {
   }
 }
 
-export const createCourse = () => async (dispatch, getState) => {
+export const createCourse = (formData) => async (dispatch, getState) => {
   try {
     dispatch({
       type: COURSE_CREATE_REQUEST,
@@ -116,7 +116,7 @@ export const createCourse = () => async (dispatch, getState) => {
       },
     }
 
-    const { data } = await axios.post(`/api/course`, {}, config)
+    const { data } = await axios.post(`/api/course`, formData, config)
 
     dispatch({
       type: COURSE_CREATE_SUCCESS,

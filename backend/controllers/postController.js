@@ -1,5 +1,6 @@
 import asyncHandler from 'express-async-handler'
 import Post from '../models/PostModel.js'
+import User from '../models/userModel.js'
 
 // @desc    Fetch all products
 // @route   GET /api/products
@@ -110,6 +111,20 @@ const getTopPosts = asyncHandler(async (req, res) => {
   res.json(posts)
 })
 
+
+const authorProfile = asyncHandler(async (req, res) => {
+
+  const user = await Post.find({user:req.params.authorid})
+  
+  console.log(user)
+  if (user) {
+    res.json(user)
+  } else {
+    res.status(404)
+    throw new Error('User not found')
+  }
+})
+
 export {
   getPosts,
   getPostById,
@@ -117,4 +132,5 @@ export {
   createPost,
   updatePost,
   getTopPosts,
+  authorProfile
 }

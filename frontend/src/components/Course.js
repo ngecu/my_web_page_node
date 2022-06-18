@@ -5,28 +5,47 @@ import Rating from './Rating'
 
 const Course = ({ course }) => {
   return (
-    <Card className='my-3 p-3 rounded'>
+
+    <div className="col-md-2 col-lg-3 col-12">
+    <div className="card mb-2">
     <Link to={`/course/${course._id}`}>
-      <Card.Img src={course.image} variant='top' />
-    </Link>
-
-    <Card.Body>
-      <Link to={`/course/${course._id}`}>
-        <Card.Title as='div'>
-          <strong>{course.name}</strong>
-        </Card.Title>
+      <img src={course.image} alt="x" className="card-img-top"/>
       </Link>
+      <div className="card-body">
+        <Card.Title>{course.name}</Card.Title>
+        <small className="card-text text-muted">{course.user.name}</small>
+        <div className="mb-2">
+          <span className="font-bold"><strong>${course.price}</strong></span>
+        </div>
+      </div>
 
-      <Card.Text as='div'>
-        <Rating
-          value={course.rating}
-          text={`${course.numReviews} reviews`}
-        />
-      </Card.Text>
+      <div className="card-footer">
+        <div className="row">
+          <div className="col-md-12 mb-2">
+<small>
+<Rating
+            value={course.rating}
+            text={`${course.numReviews} reviews`}
+          />
 
-      <Card.Text as='h3'>${course.price}</Card.Text>
-    </Card.Body>
-  </Card>
+</small>
+                                
+
+                                
+            
+                                </div>
+          {/* <div className="col-md-2">
+            <button type="button" className="btn btn-primary btn-sm btn-block"
+              id="addToCart" onclick="addToCart">
+              <span className="glyphicon glyphicon-shopping-cart"
+                aria-hidden="true"></span> 
+            </button>
+          </div> */}
+        </div>
+      </div>
+    </div>
+  </div>
+        
   )
 }
 

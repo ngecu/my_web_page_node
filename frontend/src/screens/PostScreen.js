@@ -97,12 +97,13 @@ const PostScreen = ({ match }) => {
                                 </div>
                             </Col>
 
-                            <Col md={11} xs={12} className="col-md-offset-2 border border-secondary">
+                            <Col md={11} xs={12} className="col-md-offset-2 border">
                               
                                 <Col className="mainheading">
 
                                     <h1 className="posttitle"> <strong> {post?.title} </strong></h1>
-                                    <span>{post?.createdAt?.substring(0, 10)}</span>
+                                    <hr/>
+                                   
                                     <Author author={post?.user} post={post} />
 
                                 </Col>
@@ -124,19 +125,22 @@ const PostScreen = ({ match }) => {
                        
                         </Row>
                         </Container>
+
                         <div class="graybg">
                             <Container>
-                        <div className="card-columns listrecent">
+                                <Row>
+                                    <Col md={1} xs={0} >
+                                        Related
+                                    </Col>
+                                    <Col md={11} xs={12}>
+                                    <div className="card-columns listrecent">
                             {posts.slice(0,3).map((post) => (
-
                                 <Post post={post}  />
-
-
-
                             ))}
-
-
                         </div>
+                                    </Col>
+                                </Row>
+                        
                         </Container>
                         </div>
                        

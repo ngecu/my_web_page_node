@@ -134,7 +134,7 @@ const ProfileScreen = ({ location, history }) => {
         )}
       </Col>
       <Col md={9}>
-        <h2>My Blogs</h2>
+        <h2>My Posts</h2>
         {loadingPosts ? (
           <Loader />
         ) : errorPosts ? (

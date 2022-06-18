@@ -46,9 +46,9 @@ const HomeScreen = ({ match }) => {
         <>
           <Row>
             {posts.length > 0 && posts.map((post) => (
-              <Col key={post._id} sm={12} md={6} lg={4} xl={3}>
+              
                 <Post post={post} />
-              </Col>
+              
             ))}
 
             {posts.length == 0 &&  
@@ -75,16 +75,24 @@ const HomeScreen = ({ match }) => {
       ) : (
         <>
           <Row>
-            {courses.map((course) => (
-              <Col key={course._id} sm={12} md={6} lg={4} xl={3} >
+            {courses && courses.map((course) => (
+             
                 <Course course={course} />
-              </Col>
+             
             ))}
 
-{courses.length == 0 &&  
+{courses && courses.length == 0 &&  
             <Col  sm={12} md={12} lg={12} xl={12}>
             <Alert key="danger" variant="danger">
      No Courses available Currently
+    </Alert>
+    </Col>
+            }
+
+{!courses &&
+            <Col  sm={12} md={12} lg={12} xl={12}>
+            <Alert key="danger" variant="danger">
+     {error_course}
     </Alert>
     </Col>
             }

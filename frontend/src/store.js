@@ -40,6 +40,14 @@ import {
   courseUpdateReducer
 } from './reducers/courseReducers'
 
+import {
+  categoryListReducer,
+  categoryDetailsReducer,
+  categoryDeleteReducer,
+  categoryCreateReducer,
+  categoryUpdateReducer
+} from './reducers/categoryReducers'
+
 import{
   ReadTagsReducer,UpdateTagsReducer,tagDeleteReducer
 } from './reducers/tagReducers'
@@ -66,6 +74,12 @@ const reducer = combineReducers({
   courseDelete: courseDeleteReducer,
   courseCreate: courseCreateReducer,
   courseUpdate: courseUpdateReducer,
+
+  categoryList: categoryListReducer,
+  categoryDetails: categoryDetailsReducer,
+  categoryDelete: categoryDeleteReducer,
+  categoryCreate: categoryCreateReducer,
+  categoryUpdate: categoryUpdateReducer,
   // productReviewCreate: postReviewCreateReducer,
   // productTopRated: postTopRatedReducer,
 

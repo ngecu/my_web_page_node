@@ -6,34 +6,34 @@ import Message from '../components/Message'
 import Loader from '../components/Loader'
 import Paginate from '../components/Paginate'
 import {
-  listProducts,
-  deleteProduct,
-  createProduct,
-} from '../actions/productActions'
+  listCourses,
+  deleteCourse,
+  createCourse,
+} from '../actions/courseActions'
 import { COURSE_CREATE_RESET } from '../constants/courseConstants'
 
-const ProductListScreen = ({ history, match }) => {
+const CourseListScreen = ({ history, match }) => {
   const pageNumber = match.params.pageNumber || 1
 
   const dispatch = useDispatch()
 
-  const productList = useSelector((state) => state.productList)
-  const { loading, error, products, page, pages } = productList
+  const courseList = useSelector((state) => state.courseList)
+  const { loading, error, courses, page, pages } = courseList
 
-  const productDelete = useSelector((state) => state.productDelete)
+  const courseDelete = useSelector((state) => state.courseDelete)
   const {
     loading: loadingDelete,
     error: errorDelete,
     success: successDelete,
-  } = productDelete
+  } = courseDelete
 
-  const productCreate = useSelector((state) => state.productCreate)
+  const courseCreate = useSelector((state) => state.courseCreate)
   const {
     loading: loadingCreate,
     error: errorCreate,
     success: successCreate,
-    product: createdProduct,
-  } = productCreate
+    course: createdCourse,
+  } = courseCreate
 
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
@@ -46,9 +46,9 @@ const ProductListScreen = ({ history, match }) => {
     }
 
     if (successCreate) {
-      history.push(`/admin/product/${createdProduct._id}/edit`)
+      history.push(`/admin/courses/${createdCourse._id}/edit`)
     } else {
-      dispatch(listProducts('', pageNumber))
+      dispatch(listCourses('', pageNumber))
     }
   }, [
     dispatch,
@@ -56,29 +56,29 @@ const ProductListScreen = ({ history, match }) => {
     userInfo,
     successDelete,
     successCreate,
-    createdProduct,
+    createdCourse,
     pageNumber,
   ])
 
   const deleteHandler = (id) => {
     if (window.confirm('Are you sure')) {
-      dispatch(deleteProduct(id))
+      dispatch(deleteCourse(id))
     }
   }
 
-  const createProductHandler = () => {
-    dispatch(createProduct())
+  const createCourseHandler = () => {
+    dispatch(createCourse())
   }
 
   return (
     <>
       <Row className='align-items-center'>
         <Col>
-          <h1>Products</h1>
+          <h1>Courses</h1>
         </Col>
         <Col className='text-right'>
-          <Button className='my-3' onClick={createProductHandler}>
-            <i className='fas fa-plus'></i> Create Product
+          <Button className='my-3' onClick={createCourseHandler}>
+            <i className='fas fa-plus'></i> Create Course
           </Button>
         </Col>
       </Row>
@@ -97,20 +97,21 @@ const ProductListScreen = ({ history, match }) => {
               <tr>
                 <th>ID</th>
                 <th>NAME</th>
+                <th>AUTHOR</th>
                 <th>PRICE</th>
                 <th>CATEGORY</th>
-                <th>BRAND</th>
                 <th></th>
               </tr>
             </thead>
             <tbody>
-              {products.map((product) => (
+              {courses && courses.map((product) => (
                 <tr key={product._id}>
                   <td>{product._id}</td>
                   <td>{product.name}</td>
+                  <td>{product.user}</td>
                   <td>${product.price}</td>
                   <td>{product.category}</td>
-                  <td>{product.brand}</td>
+               
                   <td>
                     <LinkContainer to={`/admin/product/${product._id}/edit`}>
                       <Button variant='light' className='btn-sm'>
@@ -136,4 +137,4 @@ const ProductListScreen = ({ history, match }) => {
   )
 }
 
-export default ProductListScreen
+export default CourseListScreen

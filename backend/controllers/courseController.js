@@ -7,24 +7,10 @@ import Course from '../models/courseModel.js'
 // @route   GET /api/products
 // @access  Public
 const getCourses = asyncHandler(async (req, res) => {
-  const pageSize = 10
-  const page = Number(req.query.pageNumber) || 1
+  const courses = await Course.find().populate("user")
 
-  const keyword = req.query.keyword
-    ? {
-        name: {
-          $regex: req.query.keyword,
-          $options: 'i',
-        },
-      }
-    : {}
 
-  const count = await Course.countDocuments({ ...keyword })
-  const courses = await Course.find({ ...keyword })
-    .limit(pageSize)
-    .skip(pageSize * (page - 1))
-
-  res.json({ courses, page, pages: Math.ceil(count / pageSize) })
+  res.json({ courses })
 })
 
 // @desc    Delete a product
@@ -47,9 +33,12 @@ const deleteCourse = asyncHandler(async (req, res) => {
 // @access  Private/Admin
 const createCourse = asyncHandler(async (req, res) => {
 
-const {user,name,image,category,description,reviews,price} = req.body;
+const {user,name,image,description,price} = req.body;
+const category = "62ac8a75e1b4a62e1468f066"
 
-  const course = new Course({user,name,image,category,description,reviews,price })
+console.log(req.body)
+
+  const course = new Course({user,name,image,category,description,price })
 
   const createdCourse = await course.save()
   res.status(201).json(createdCourse)
@@ -81,11 +70,27 @@ const updateCourse = asyncHandler(async (req, res) => {
   }
 })
 
+
+
+
+
+const getCourseById = asyncHandler(async (req, res) => {
+  const course = await Course.findById(req.params.id).populate("user")
+
+  if (course) {
+    res.json(course)
+  } else {
+    res.status(404)
+    throw new Error('Course not found')
+  }
+})
+
 export {
   getCourses,
   createCourse,
   deleteCourse,
-  updateCourse
+  updateCourse,
+  getCourseById
   }
   
 

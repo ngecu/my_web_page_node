@@ -2,7 +2,7 @@ import express from 'express'
 const router = express.Router()
 import {
   getCourses,
-  // getPostById,
+  getCourseById,
   deleteCourse,
   createCourse,
   updateCourse,
@@ -14,7 +14,7 @@ router.route('/').get(getCourses).post(createCourse)
 // router.get('/top', getTopPosts)
 router
   .route('/:id')
-  // .get(getPostById)
+  .get(getCourseById)
   .delete(protect, admin, deleteCourse)
   .put(protect, admin, updateCourse)
 

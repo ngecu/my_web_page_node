@@ -8,12 +8,13 @@ const Post = ({ post }) => {
   const x = post.body;
 
   return (
-    <Card>
+    
+    <Card className="col-md-2 col-lg-3 col-12">
     <Link to={`/post/${post._id}`}>
-  <Card.Img variant='top' src={post.image} />
+  <Card.Img variant='top' src={post.image} style={{height:"200px"}} />
   </Link>
   <Card.Body>
-    <Card.Title>{post.title.substring(0,50)}</Card.Title>
+    <Card.Title>{post.title.substring(0,50)}...</Card.Title>
     <Card.Text>
     <Markup content={x.substring(0,20 )} />
      

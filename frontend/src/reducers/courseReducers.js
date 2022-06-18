@@ -44,14 +44,14 @@ import {
   }
   
   export const courseDetailsReducer = (
-    state = { COURSE: { reviews: [] } },
+    state = { course: { reviews: [] } },
     action
   ) => {
     switch (action.type) {
       case COURSE_DETAILS_REQUEST:
         return { ...state, loading_course: true }
       case COURSE_DETAILS_SUCCESS:
-        return { loading_course: false, courses: action.payload }
+        return { loading_course: false, course: action.payload }
       case COURSE_DETAILS_FAIL:
         return { loading_course: false, error_course: action.payload }
       default:

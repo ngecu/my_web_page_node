@@ -21,6 +21,9 @@ import OrderListScreen from './screens/OrderListScreen'
 import TagPostScreen from './screens/TagPostScreen';
 import NewPostScreen from "./screens/NewPostScreen";
 import NewCourseScreen from "./screens/NewCourseScreen";
+import CourseListScreen from "./screens/CourseListScreen";
+import CourseScreen from './screens/CourseScreen'
+
 
 
 const App = () => {
@@ -30,9 +33,10 @@ const App = () => {
       <main className='py-3'>
         <Container>
         <Route path='/tag/:id' component={TagPostScreen} />
+        <Route path='/course/:id' component={CourseScreen} />
             <Route path='/newPost' component={NewPostScreen} />
             <Route path='/newCourse' component={NewCourseScreen} />
-
+            <Route path='/courses' component={CourseListScreen} />
             
 
           <Route path='/order/:id' component={OrderScreen} />
@@ -46,13 +50,9 @@ const App = () => {
           <Route path='/cart/:id?' component={CartScreen} />
           <Route path='/admin/userlist' component={UserListScreen} />
           <Route path='/admin/user/:id/edit' component={UserEditScreen} />
+       
           <Route
-            path='/admin/postist'
-            component={PostListScreen}
-            exact
-          />
-          <Route
-            path='/admin/postlist/:pageNumber'
+            path='/posts'
             component={PostListScreen}
             exact
           />

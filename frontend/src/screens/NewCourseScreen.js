@@ -31,7 +31,7 @@ const NewCourseScreen = ({ location, history }) => {
     const courseCreate = useSelector((state) => state.courseCreate)
     const readCategories = useSelector((state)=>state.readCategories)
 
-    const categoryList = useSelector((state) => state.courseList)
+    const categoryList = useSelector((state) => state.categoryList)
     const { loading_category, error_category, categories } = categoryList
   
     const {
@@ -59,6 +59,7 @@ const NewCourseScreen = ({ location, history }) => {
 
     useEffect(() => {
         dispatch(listCategories())
+        // setcategory(categories[0]._id)
         dispatch({type:COURSE_CREATE_RESET})
         if (!userInfo){
             history.push('/login')
@@ -97,19 +98,23 @@ const NewCourseScreen = ({ location, history }) => {
         }
     }
 
+    const reviews = {
+        name:"Robinson Ngecu",
+        rating:5,
+        comment:"Very Dope",
+        user
+    }
+
     const s = {
-       name,image,category,description
+       user,name,image,category,description,price,reviews
     }
 
     const submitHandler = (e) => {
         e.preventDefault()
         console.log(s)
-            dispatch(createCourse(s))
-           
-           
-            setTimeout(() => { 
-                history.push('/');
-              }, 5000)
+            if(dispatch(createCourse(s))){
+                    history.push('/');
+            }
     }
 
 
@@ -121,6 +126,7 @@ const  handleChange=(e)=> {
         for (let i = 0; i < selectedOption.length; i++){
             selected.push(selectedOption.item(i).value)
         }
+        console.log(selected)
         setcategory(selected)
     }
 
@@ -169,7 +175,7 @@ const  handleChange=(e)=> {
                         placeholder='Enter Price'
                         required
 
-                        value={description}
+                        value={price}
                         onChange={(e) => setprice(e.target.value)}
                     ></Form.Control>
                 </Form.Group>

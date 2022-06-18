@@ -12,7 +12,7 @@ import { POST_UPDATE_RESET } from '../constants/postConstants'
 const ProductEditScreen = ({ match, history }) => {
   const postId = match.params.id
 
-  const [name, setName] = useState('')
+  const [title, setTitle] = useState('')
   const [price, setPrice] = useState(0)
   const [image, setImage] = useState('')
   const [brand, setBrand] = useState('')
@@ -26,22 +26,14 @@ const ProductEditScreen = ({ match, history }) => {
   const postDetails = useSelector((state) => state.postDetails)
   const { loading, error, post } = postDetails
 
-  const postUpdate = useSelector((state) => state.postUpdate)
-  const {
-    loading: loadingUpdate,
-    error: errorUpdate,
-    success: successUpdate,
-  } = postUpdate
+  
 
   useEffect(() => {
-    if (successUpdate) {
-      dispatch({ type: POST_UPDATE_RESET })
-      history.push('/admin/postlist')
-    } else {
-      if (!post.name || post._id !== postId) {
+
+      if (!post.title || post._id !== postId) {
         dispatch(listPostDetails(postId))
       } else {
-        setName(post.name)
+        setTitle(post.title)
         setPrice(post.price)
         setImage(post.image)
         setBrand(post.brand)
@@ -49,8 +41,8 @@ const ProductEditScreen = ({ match, history }) => {
         setCountInStock(post.countInStock)
         setDescription(post.description)
       }
-    }
-  }, [dispatch, history, postId, post, successUpdate])
+    
+  }, [dispatch, history])
 
   const uploadFileHandler = async (e) => {
     const file = e.target.files[0]
@@ -80,7 +72,7 @@ const ProductEditScreen = ({ match, history }) => {
     dispatch(
       updatePost({
         _id: postId,
-        name,
+        title,
         price,
         image,
         brand,
@@ -97,9 +89,7 @@ const ProductEditScreen = ({ match, history }) => {
         Go Back
       </Link>
       <FormContainer>
-        <h1>Edit Product</h1>
-        {loadingUpdate && <Loader />}
-        {errorUpdate && <Message variant='danger'>{errorUpdate}</Message>}
+        <h1>Edit Post</h1>
         {loading ? (
           <Loader />
         ) : error ? (
@@ -111,11 +101,11 @@ const ProductEditScreen = ({ match, history }) => {
               <Form.Control
                 type='name'
                 placeholder='Enter name'
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
               ></Form.Control>
             </Form.Group>
-
+              
             <Form.Group controlId='price'>
               <Form.Label>Price</Form.Label>
               <Form.Control

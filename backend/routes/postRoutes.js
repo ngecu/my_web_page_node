@@ -7,9 +7,11 @@ import {
   createPost,
   updatePost,
   getTopPosts,
+  authorProfile
 } from '../controllers/postController.js'
 import { protect, admin } from '../middleware/authMiddleware.js'
 
+router.route('/author/:authorid').get(authorProfile)
 router.route('/').get(getPosts).post(createPost)
 router.get('/top', getTopPosts)
 router
