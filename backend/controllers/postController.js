@@ -30,7 +30,7 @@ const getPosts = asyncHandler(async (req, res) => {
 // @route   GET /api/products/:id
 // @access  Public
 const getPostById = asyncHandler(async (req, res) => {
-  const post = await Post.findById(req.params.id)
+  const post = await Post.findById(req.params.id).populate("user")
 
   if (post) {
     res.json(post)

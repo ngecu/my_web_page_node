@@ -13,9 +13,9 @@ const Post = ({ post }) => {
   <Card.Img variant='top' src={post.image} />
   </Link>
   <Card.Body>
-    <Card.Title>{post.title.substring(0,9)}</Card.Title>
+    <Card.Title>{post.title.substring(0,50)}</Card.Title>
     <Card.Text>
-    <Markup content={x.substring(0,60 )} />
+    <Markup content={x.substring(0,20 )} />
      
     </Card.Text>
     <div className="metafooter">

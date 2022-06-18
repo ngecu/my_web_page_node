@@ -97,7 +97,7 @@ const PostScreen = ({ match }) => {
                                 </div>
                             </Col>
 
-                            <Col md={7} xs={12} className="col-md-offset-2 border border-secondary">
+                            <Col md={11} xs={12} className="col-md-offset-2 border border-secondary">
                               
                                 <Col className="mainheading">
 
@@ -108,13 +108,11 @@ const PostScreen = ({ match }) => {
                                 </Col>
 
                                 <Row>
-                                    <Col  md={10} xs={10}>
+                                    <Col  md={12} xs={12}>
                                     <div className="article-post">
                                         <Markup content={post?.body} />
                                     </div>
-                                    <Col  md={2} xs={2}>
-                                    Ads
-                                    </Col>
+                                   
                                     </Col>
                                 </Row>
                                     
@@ -123,9 +121,7 @@ const PostScreen = ({ match }) => {
 
 
                             </Col>
-                        <Col md={3}>
-                        I am Author Details Section
-                        </Col>
+                       
                         </Row>
                         </Container>
                         <div class="graybg">
