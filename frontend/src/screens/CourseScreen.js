@@ -1,7 +1,7 @@
 import React, {  useState,useEffect,useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import {Row, Col,Container, Image, ListGroup, Card, Button, Badge} from 'react-bootstrap'
+import {Row, Col,Container, Image, ListGroup, Card, Button,Modal, Badge} from 'react-bootstrap'
 import Accordion from 'react-bootstrap/Accordion';
 import { Markup } from 'interweave';
 import Message from '../components/Message'
@@ -17,6 +17,7 @@ import {listCourseDetails} from '../actions/courseActions'
 import {getAuthorDetails} from '../actions/userActions'
 import Tag from "../components/Tag";
 import Rating from '../components/Rating';
+import logo from '../components/9932f1_c33450aa552f4a64b2b679b4df61cfbd~mv2.gif';
 
 const PostScreen = ({ match }) => {
 
@@ -50,6 +51,14 @@ const PostScreen = ({ match }) => {
     }, [dispatch, match])
 
 
+   const generateAlert = () => {
+        alert("Hi");
+    }
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
     return (
         <>
 
@@ -60,6 +69,22 @@ const PostScreen = ({ match }) => {
             ) : (
                 <>
                     <Container>
+
+                    <Modal  size="lg" show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Patience</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+        <img src={logo} fluid className="w-100" />
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            ok
+          </Button>
+     
+        </Modal.Footer>
+      </Modal>
+
                         <Row>
                             <Col md={8} xs={12} className="col-md-offset-2">
                               
@@ -102,10 +127,10 @@ const PostScreen = ({ match }) => {
 
 
     <div className="d-grid gap-2">
-  <Button variant="primary" className="btn-block block" >
+  <Button variant="primary" onClick={handleShow} className="btn-block block" >
     Add To Cart
   </Button>
-  <Button variant="primary" className="btn-block block">
+  <Button variant="primary"  onClick={handleShow} className="btn-block block">
    Buy
   </Button>
 </div>
@@ -113,6 +138,7 @@ const PostScreen = ({ match }) => {
 <strong>This course includes:</strong>
 
 <ul>
+    <li>Sectioned Source Code</li>
     <li>Full Time Access</li>
     <li>Access on Mobile and Tv</li>
     <li>On Demand Video</li>

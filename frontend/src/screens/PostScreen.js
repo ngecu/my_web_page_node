@@ -7,6 +7,10 @@ import Message from '../components/Message'
 import Loader from '../components/Loader'
 import Author from "../components/Author";
 import './CSS/PostScreen.css'
+import './CSS/prism.css'
+import './CSS/pop.css'
+
+
 import Meta from '../components/Meta'
 
 import {listPostDetails} from '../actions/postActions'
@@ -17,6 +21,7 @@ import {listPosts} from '../actions/postActions'
 import {getAuthorDetails} from '../actions/userActions'
 import Post from "../components/Post";
 import Tag from "../components/Tag";
+
 
 const PostScreen = ({ match }) => {
 
@@ -130,10 +135,10 @@ const PostScreen = ({ match }) => {
                             <Container>
                                 <Row>
                                     <Col md={1} xs={0} >
-                                        Related
+                                        
                                     </Col>
                                     <Col md={11} xs={12}>
-                                    <div className="card-columns listrecent">
+                                    <div className="row card-columns listrecent">
                             {posts.slice(0,3).map((post) => (
                                 <Post post={post}  />
                             ))}

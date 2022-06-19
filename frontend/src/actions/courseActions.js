@@ -25,7 +25,7 @@ export const listCourses = (keyword = '', pageNumber = '') => async (
     dispatch({ type: COURSE_LIST_REQUEST })
 
     const { data } = await axios.get(
-      `/api/course?keyword=${keyword}&pageNumber=${pageNumber}`
+      `/api/course/`
     )
 
     dispatch({
